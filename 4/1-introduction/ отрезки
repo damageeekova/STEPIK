@@ -1,6 +1,8 @@
 #include <math.h>
 #include <iostream>
 using namespace std;
+/*По данным n отрезкам необходимо найти множество точек минимального размера, для которого
+каждый из отрезков содержит хотя бы одну из точек*/
 int main() {
 int s;
 cout << "Enter number of segments   ";
