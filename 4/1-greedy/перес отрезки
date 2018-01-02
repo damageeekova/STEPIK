@@ -1,0 +1,42 @@
+#include <math.h>
+#include <iostream>
+using namespace std;
+int main() {
+int s;
+cout << "Enter number of segments   ";
+cin >> s;
+int temp;
+cout << "Enter segments " <<endl;
+int n[s], k[s], tempn, tempk;
+for (int i=0; i<s; i++){
+    if (n[i]>k[i]) {
+            temp=n[i];
+            n[i]=k[i];
+            k[i]=temp;
+
+    }
+}
+for (int i=0; i < s; i++)  cin >> n[i] >> k[i];
+    for (int i = 0; i < s ; i++) {
+        for (int j = 0; j < s - i ; j++) {
+            if (n[j] > n[j + 1]) {
+                tempn = n[j];
+                n[j] = n[j + 1];
+                n[j + 1] = tempn;
+                tempk = k[j];
+                k[j] = k[j + 1];
+                k[j + 1] = tempk;
+            }
+        }
+    }
+    int h=0;
+    cout << endl << "Points: " << endl;
+    for (int i=0; i<s; i++){
+            if (k[i]>=n[i+1]) {cout<< k[i] <<" ";
+            h++;
+            }
+            else continue;
+        }
+    cout << "Number " << h;
+  return 0;
+}
