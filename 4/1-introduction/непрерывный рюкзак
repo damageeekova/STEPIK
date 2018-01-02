@@ -1,0 +1,66 @@
+#include <math.h>
+#include <iostream>
+using namespace std;
+int main() {
+double W;
+cout << "Enter the amount ";
+cin >> W;
+int n;
+cout << endl << "Enter the number of subjects ";
+cin >> n;
+double c[n], v[n];
+cout  << endl<< "Enter amount and cost of every of them ";
+for (int i=0; i < n; i++){
+    cin >> v[i] >> c[i];
+}
+double u[n];
+for (int i=0; i < n; i++){
+        u[i]= v[i]/c[i];
+        cout << endl << u[i];
+}
+double temp;
+double price;
+cout << endl;
+int tempc, tempv;
+for (int i=0; i < n; i++){
+    for (int j=0; j < n-i; j++)
+         if (u[j] < u[j + 1]) {
+                temp = u[j];
+                u[j] = u[j + 1];
+                u[j + 1] = temp;
+
+                tempc = c[j];
+                c[j] = c[j + 1];
+                c[j + 1] = temp;
+                tempv = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+}
+}
+for (int i=0; i < n; i++){
+        cout << endl << u[i];
+}
+int W1=W;
+int ost;
+price=0;
+for (int i=0; i < n; i++){
+        if (W!=0) {
+            if (v[i] < W)  {
+                W = W-v[i];
+                price = price+c[i];
+                cout << endl<< "Price = " << price;
+                cout << endl<< "Amount = " << W;
+            }
+            else{
+            ost =v[i]-W;
+            W=v[i]-ost;
+            price = price + W/ u[i];
+                cout << endl<< "Price = " << price;
+                W=0;
+                cout << endl<< "Amount = " << W;
+            }
+    }
+}
+    cout << endl << "Total cost= " << price;
+    return 0;
+}
