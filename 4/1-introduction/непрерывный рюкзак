@@ -15,33 +15,30 @@ for (int i=0; i < n; i++){
 }
 double u[n];
 for (int i=0; i < n; i++){
-        u[i]= v[i]/c[i];
-        cout << endl << u[i];
+        u[i]= c[i]/v[i];
 }
 double temp;
 double price;
 cout << endl;
-int tempc, tempv;
+double tempc, tempv;
 for (int i=0; i < n; i++){
     for (int j=0; j < n-i; j++)
          if (u[j] < u[j + 1]) {
+
                 temp = u[j];
                 u[j] = u[j + 1];
                 u[j + 1] = temp;
 
                 tempc = c[j];
                 c[j] = c[j + 1];
-                c[j + 1] = temp;
+                c[j + 1] = tempc;
+
                 tempv = v[j];
                 v[j] = v[j + 1];
-                v[j + 1] = temp;
+                v[j + 1] = tempv;
 }
 }
-for (int i=0; i < n; i++){
-        cout << endl << u[i];
-}
-int W1=W;
-int ost;
+double W1=W;
 price=0;
 for (int i=0; i < n; i++){
         if (W!=0) {
@@ -52,9 +49,7 @@ for (int i=0; i < n; i++){
                 cout << endl<< "Amount = " << W;
             }
             else{
-            ost =v[i]-W;
-            W=v[i]-ost;
-            price = price + W/ u[i];
+            price = price + W*u[i];
                 cout << endl<< "Price = " << price;
                 W=0;
                 cout << endl<< "Amount = " << W;
