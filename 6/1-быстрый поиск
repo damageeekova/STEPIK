@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+
+void qsort (int *a,int b, int e)
+{
+  int l = b, r = e;
+  int piv = a[(l + r) / 2];
+  while (l <= r)
+  {
+    while (a[l] < piv)
+      l++;
+    while (a[r] > piv)
+      r--;
+    if (l <= r)
+      swap (a[l++], a[r--]);
+  }
+  if (b < r)
+    qsort (a,b, r);
+  if (e > l)
+    qsort (a,l, e);
+}
+
+void qsort2 (int*b,int d, int e)
+{
+  int l = d, r = e;
+  int piv = b[(l + r) / 2];
+  while (l <= r)
+  {
+    while (b[l] < piv)
+      l++;
+    while (b[r] > piv)
+      r--;
+    if (l <= r)
+      swap (b[l++], b[r--]);
+  }
+  if (d < r)
+    qsort (b,d, r);
+  if (e > l)
+    qsort (b,l, e);
+}
+
+
+
+
+int BinarySearch_Rec(int*a, int key, int left, int right){
+    int mid = left + (right - left) / 2;
+    if (left == right && a[mid] != key) return -1;
+    if (a[mid] == key)
+        return mid;
+  else if (a[mid] > key)
+        return BinarySearch_Rec(a, key, left, mid);
+    else
+        return BinarySearch_Rec(a, key, mid + 1, right);
+}
+
+int main(){
+    int n,k;
+    cout << "Enter n ";
+    cin >> n;
+    int a[n];
+
+    for (int i = 0; i < n; i++) cin >> a[i];
+    qsort(a,0, n-1);
+    for (int i = 0; i < n; i++) cout << a[i] << " ";
+    cout << endl;
+    cout << "Enter k ";
+    cin >> k;
+    int b[k];
+    for (int i = 0; i < k; i++) cin >> b[i];
+    qsort2(b,0, k-1);
+    for (int i = 0; i < k; i++) cout << b[i] << " ";
+    cout << endl;
+    for (int i = 0; i < k; i++){
+    cout << BinarySearch_Rec (a,b[i],0,n-1) << " ";
+
+    }
+return 0;
+}
