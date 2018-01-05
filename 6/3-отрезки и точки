@@ -1,0 +1,56 @@
+#include <iostream>
+#include <stdio.h>
+/*В первой строке задано два целых числа 1≤n≤500001≤n≤50000 и 1≤m≤500001≤m≤50000 — количество отрезков 
+и точек на прямой, соответственно. Следующие nn строк содержат по два целых числа aiai и bibi (ai≤biai≤bi)
+— координаты концов отрезков. Последняя строка содержит mm целых чисел — координаты точек. 
+Все координаты не превышают 108108 по модулю. Точка считается принадлежащей отрезку,
+если она находится внутри него или на границе. Для каждой точки в порядке появления во вводе выведите, 
+скольким отрезкам она принадлежит.*/
+
+
+using namespace std;
+void Qsort(int *b, int *k, int m, int n){
+    int l=m;
+    int r=n;
+    int piv=b[(l+r)/2];
+
+    while (l<=r) {
+        while (b[l]<piv) l++;
+        while (b[r]>piv) r--;
+        if (l<=r) {swap (b[l],b[r]); swap (k[l],k[r]); l++; r--;
+    }
+  }
+if (m<r) Qsort (b,k,m,r);
+if (l<n) Qsort (b,k,l,n);
+}
+
+int main() {
+int s;
+cout << "Enter number of segments   ";
+cin >> s;
+int temp;
+cout << "Enter segments " <<endl;
+int b[s], k[s], tempn, tempk;
+for (int i=0; i < s; i++)  cin >> b[i] >> k[i];
+Qsort(b,k,0,s-1);
+int num;
+
+cout << "Enter number of points ";
+cin >> num;
+int point [num];int p[num];
+for (int i=0; i < num; i++)  {
+        cin >> point [i];
+        p[i]=0;
+}
+
+for (int i=0; i < s; i++){
+    if (k[i]>=b[i+1]) {
+        for (int j=0; j < num; j++){
+            if (point [j]<=k[i+1]&& point[j]>=b[i]) p[j]++;
+        }
+    }
+}
+cout << endl;
+for (int i=0; i < num; i++) cout << p[i] << " ";
+return 0;
+}
