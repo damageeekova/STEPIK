@@ -1,0 +1,68 @@
+
+#include<iostream>
+using namespace std;
+
+/*Первая строка содержит число 1≤n≤1051≤n≤105, вторая — массив A[1…n]A[1…n], содержащий натуральные числа, 
+не превосходящие 109109. Необходимо посчитать число пар индексов 1≤i<j≤n1≤i<j≤n, для которых A[i]>A[j]A[i]>A[j].
+(Такая пара элементов называется инверсией массива. 
+Количество инверсий в массиве является в некотором смысле его мерой неупорядоченности: например, 
+в упорядоченном по неубыванию массиве инверсий нет вообще, 
+а в массиве, упорядоченном по убыванию, инверсию образуют каждые два элемента.)*/
+
+int merge(int arr1[],int size1,int arr2[],int size2,int temp[]){
+    int count  = 0;
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    while(a < size1 && b < size2){
+        if(arr1[a] <= arr2[b]){
+            temp[c] = arr1[a];
+            c++;
+            a++;
+        }
+        else{
+            temp[c] = arr2[b];
+            b++;
+            c++;
+            count = count + size1 -a;
+        }
+    }
+while(a < size1){
+        temp[c] = arr1[a];
+        c++;a++;
+    }
+
+while(b < size2){
+        temp[c] = arr2[b];
+        c++;b++;
+    }
+return count;
+}
+
+int countinv(int *a, int size){
+    if(size > 1 ){
+    int mid = size / 2;
+    int count1 = countinv (a,mid);
+    int count2 = countinv(a+mid,size-mid);
+    int temp[size];
+    int count3 = merge(a,mid,a+mid,size-mid,temp);
+    for(int x =0; x < size ; x ++) a[x] = temp[x];
+    return count1 + count2 + count3;
+    }
+    else return 0;
+}
+
+
+
+int main()
+{
+    int size;
+    cout << " Enter size ";
+    cin >> size;
+    int a[size];
+    cout << " Enter array ";
+    for (int i = 0; i < size; i ++) cin >> a[i];
+    int x = countinv(a,size);
+    cout << "Number of inversions = " << x;
+    return 0;
+}
