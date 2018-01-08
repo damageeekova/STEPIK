@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+/*Дано целое число 1≤n≤1031≤n≤103 и массив A[1…n]A[1…n] натуральных чисел, не превосходящих 2⋅1092⋅109. 
+Выведите максимальное 1≤k≤n1≤k≤n, для которого найдётся подпоследовательность 1≤i1<i2<…<ik≤n1≤i1<i2<…<ik≤n длины kk,
+ в которой каждый элемент делится на предыдущий (формально: для  всех 1≤j<k1≤j<k, A[ij]|A[ij+1]A[ij]|A[ij+1]).*/
+int main(){
+    int n;
+    cout << "Enter n";
+    cin >> n;
+    n++;
+    int a[n];
+    for (int i=1 ;i < n; i++) cin >> a[i];
+    int d[n];
+    for (int i=1; i < n ; i++){
+            d[i]=1;
+        for (int j=1; j < i; j++){
+           if (a[j]< a[i]&& d[j]+1 > d[i]) {
+                if (a[i]%a[j]==0) d[i]=d[j]+1;
+
+           }
+        }
+    }
+    int ans=0;
+    for (int i=1; i < n ; i++)  ans = max (d[i],ans);
+    cout << ans;
+    return 0;
+    }
+
